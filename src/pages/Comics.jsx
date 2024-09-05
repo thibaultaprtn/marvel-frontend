@@ -7,7 +7,7 @@ const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(100);
+  const [limit, setLimit] = useState(20);
   const [pagemax, setPagemax] = useState(null);
 
   useEffect(() => {
@@ -52,6 +52,26 @@ const Comics = () => {
           {/* TODO Gérer les conditions d'affichage de l'input page */}
           {/* TODO Plutot qu'un input il vaudrait mieux faire des boutons */}
           <label htmlFor="comicspage"> Quelle page </label>
+          <button
+            onClick={(event) => {
+              if (page > 5) {
+                setPage(page - 5);
+              } else {
+                setPage(1);
+              }
+            }}
+          >
+            &lt;&lt;
+          </button>
+          <button
+            onClick={(event) => {
+              if (page > 1) {
+                setPage(page - 1);
+              }
+            }}
+          >
+            &lt;
+          </button>
           <span>1...</span>
           <input
             id="comicspage"
@@ -75,15 +95,40 @@ const Comics = () => {
             }}
           />
           <span>...{pagemax}</span>
-          <label htmlFor="comicslimit"> Combien d'élément par pages </label>
-          <input
-            id="comicsslimit"
-            type="number"
-            value={limit}
+          <button
+            onClick={(event) => {
+              if (page < pagemax) {
+                setPage(page + 1);
+              }
+            }}
+          >
+            &gt;
+          </button>
+          <button
+            onClick={(event) => {
+              if (page < pagemax - 5) {
+                setPage(page + 5);
+              } else {
+                setPage(pagemax);
+              }
+            }}
+          >
+            &gt;&gt;
+          </button>
+
+          <label for="limit">Nombre de comics par page :</label>
+          <select
+            style={{ borderColor: "#757575", borderRadius: 3 }}
+            name="limit"
             onChange={(event) => {
+              // console.log("event.target.value ==>", event.target.value);
               setLimit(event.target.value);
             }}
-          />
+          >
+            <option value={20}> 20 </option>
+            <option value={50}> 50 </option>
+            <option value={100}> 100 </option>
+          </select>
           <div>
             {data.results.map((elem) => {
               return <p key={elem._id}>{elem.title}</p>;
