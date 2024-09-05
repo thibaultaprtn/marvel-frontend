@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const serverurl = import.meta.env.VITE_BACKURL;
 
+//import des composants
+import Pagination from "../components/Pagination";
+
 const Comics = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -49,89 +54,29 @@ const Comics = () => {
               setSearch(event.target.value);
             }}
           />
-          {/* TODO Gérer les conditions d'affichage de l'input page */}
-          {/* TODO Plutot qu'un input il vaudrait mieux faire des boutons */}
-          <label htmlFor="comicspage"> Quelle page </label>
-          <button
-            onClick={(event) => {
-              if (page > 5) {
-                setPage(page - 5);
-              } else {
-                setPage(1);
-              }
-            }}
-          >
-            &lt;&lt;
-          </button>
-          <button
-            onClick={(event) => {
-              if (page > 1) {
-                setPage(page - 1);
-              }
-            }}
-          >
-            &lt;
-          </button>
-          <span>1...</span>
-          <input
-            id="comicspage"
-            type="number"
-            value={page || ""}
-            min="1"
-            max={`${pagemax}`}
-            required
-            onChange={(event) => {
-              // console.log("event.target.max", Number(event.target.max));
-              let { value, min, max } = event.target;
-              if (value === "") {
-                setPage(null);
-              } else {
-                value = Math.max(
-                  Number(min),
-                  Math.min(Number(max), Number(value))
-                );
-                setPage(value);
-              }
-            }}
-          />
-          <span>...{pagemax}</span>
-          <button
-            onClick={(event) => {
-              if (page < pagemax) {
-                setPage(page + 1);
-              }
-            }}
-          >
-            &gt;
-          </button>
-          <button
-            onClick={(event) => {
-              if (page < pagemax - 5) {
-                setPage(page + 5);
-              } else {
-                setPage(pagemax);
-              }
-            }}
-          >
-            &gt;&gt;
-          </button>
 
-          <label for="limit">Nombre de comics par page :</label>
-          <select
-            style={{ borderColor: "#757575", borderRadius: 3 }}
-            name="limit"
-            onChange={(event) => {
-              // console.log("event.target.value ==>", event.target.value);
-              setLimit(event.target.value);
-            }}
-          >
-            <option value={20}> 20 </option>
-            <option value={50}> 50 </option>
-            <option value={100}> 100 </option>
-          </select>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            pagemax={pagemax}
+            limit={limit}
+            setLimit={setLimit}
+            datacount={data.count}
+          />
+
           <div>
             {data.results.map((elem) => {
-              return <p key={elem._id}>{elem.title}</p>;
+              return (
+                <div
+                  key={elem._id}
+                  onClick={(e) => {
+                    navigate(`/comic/${elem._id}`);
+                  }}
+                >
+                  <p>{elem.title}</p>
+                  <button>Favorite</button>
+                </div>
+              );
             })}
           </div>
         </>
