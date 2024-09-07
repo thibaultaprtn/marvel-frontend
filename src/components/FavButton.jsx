@@ -6,7 +6,7 @@ const serverurl = import.meta.env.VITE_BACKURL;
 const FavButton = (props) => {
   // Il faut rajouter le traitement du cas de figure ou l'utilisateur est authentifié
   const { category, tab, id, setChanged, changed } = props;
-  console.log(tab);
+  // console.log(tab);
   const isConnected = Cookies.get("token") ? true : false;
 
   return (

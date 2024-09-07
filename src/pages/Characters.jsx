@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import FavButton from "../components/FavButton";
+import Cookies from "js-cookie";
 
 //Packages pour l'autocomplete qui n'a pas abbouti
 
@@ -16,6 +18,7 @@ const serverurl = import.meta.env.VITE_BACKURL;
 
 const Characters = () => {
   const navigate = useNavigate();
+
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   // const [isLoading2, setIsLoading2] = useState(true);
@@ -24,6 +27,9 @@ const Characters = () => {
   const [limit, setLimit] = useState(20);
   const [pagemax, setPagemax] = useState(null);
   // const [autcompleteoptions, setAutocompleteOptions] = useState([]);
+
+  const [favorites, setFavorites] = useState([]);
+  const [changed, setChanged] = useState(false);
 
   // useEffect(() => {
   //   const tab = ["A.I.M", "3-D Man", "Aaron Stack"];
@@ -64,6 +70,29 @@ const Characters = () => {
     }
   }, [limit]);
 
+  useEffect(() => {
+    console.log(Cookies.get("token"));
+    const fetchfavorites = async () => {
+      if (Cookies.get("token")) {
+        console.log("chemin de cookie");
+        const response = await axios.get(
+          `${serverurl}/user/favoritesid/${Cookies.get("id")}`
+        );
+        console.log("response for favorites", response);
+        setFavorites(response.data.characters);
+        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+      } else {
+        console.log("chemin de local storage");
+        setFavorites(
+          localStorage.getItem("characters")
+            ? localStorage.getItem("characters").split(",")
+            : []
+        );
+      }
+    };
+    fetchfavorites();
+  }, [changed]);
+
   // console.log("pagemax", pagemax, "limit", limit, typeof limit);
   // console.log("autocompleteoptions", autcompleteoptions);
   return (
@@ -94,14 +123,22 @@ const Characters = () => {
           <div>
             {data.results.map((elem) => {
               return (
-                <div
-                  key={elem._id}
-                  onClick={(e) => {
-                    navigate(`/character/${elem._id}`);
-                  }}
-                >
-                  <p>{elem.name}</p>
-                  <button>Favorite</button>
+                <div key={elem._id}>
+                  <p
+                    onClick={(e) => {
+                      navigate(`/character/${elem._id}`);
+                    }}
+                  >
+                    {elem.name}
+                  </p>
+                  {/* <button>Favorite</button> */}
+                  <FavButton
+                    category="characters"
+                    tab={favorites}
+                    id={elem._id}
+                    setChanged={setChanged}
+                    changed={changed}
+                  />
                 </div>
               );
             })}
