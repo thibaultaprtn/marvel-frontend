@@ -5,9 +5,19 @@ const serverurl = import.meta.env.VITE_BACKURL;
 
 const FavButton = (props) => {
   // Il faut rajouter le traitement du cas de figure ou l'utilisateur est authentifié
-  const { category, tab, id, setChanged, changed } = props;
+  const {
+    category,
+    tab,
+    id,
+    setChanged,
+    changed,
+    token,
+    setToken,
+    userId,
+    setUserId,
+  } = props;
   // console.log(tab);
-  const isConnected = Cookies.get("token") ? true : false;
+  const isConnected = token ? true : false;
 
   return (
     <>
@@ -19,18 +29,15 @@ const FavButton = (props) => {
             tabtemp.splice(index, 1);
 
             if (isConnected) {
-              await axios.put(
-                `${serverurl}/user/update/${Cookies.get("id")}}`,
-                {
-                  id: Cookies.get("id"),
-                  tabtemp: tabtemp,
-                  category: category,
-                  headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
-                    "Content-Type": "multipart/form-data",
-                  },
-                }
-              );
+              await axios.put(`${serverurl}/user/update/${token}}`, {
+                id: userId,
+                tabtemp: tabtemp,
+                category: category,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "multipart/form-data",
+                },
+              });
             } else {
               localStorage.setItem("characters", tab);
             }
@@ -46,18 +53,15 @@ const FavButton = (props) => {
             tabtemp.push(id);
 
             if (isConnected) {
-              await axios.put(
-                `${serverurl}/user/update/${Cookies.get("id")}}`,
-                {
-                  id: Cookies.get("id"),
-                  tabtemp: tabtemp,
-                  category: category,
-                  headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
-                    "Content-Type": "multipart/form-data",
-                  },
-                }
-              );
+              await axios.put(`${serverurl}/user/update/${token}}`, {
+                id: userId,
+                tabtemp: tabtemp,
+                category: category,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "multipart/form-data",
+                },
+              });
             } else {
               localStorage.setItem("characters", tab);
             }

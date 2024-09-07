@@ -16,7 +16,7 @@ import Pagination from "../components/Pagination";
 
 const serverurl = import.meta.env.VITE_BACKURL;
 
-const Characters = () => {
+const Characters = ({ token, setToken, userId, setUserId }) => {
   const navigate = useNavigate();
 
   const [data, setData] = useState();
@@ -71,12 +71,14 @@ const Characters = () => {
   }, [limit]);
 
   useEffect(() => {
-    console.log(Cookies.get("token"));
+    // console.log(Cookies.get("token"));
     const fetchfavorites = async () => {
-      if (Cookies.get("token")) {
+      if (token) {
         console.log("chemin de cookie");
+        console.log("token", token);
+        console.log("userId", userId);
         const response = await axios.get(
-          `${serverurl}/user/favoritesid/${Cookies.get("id")}`
+          `${serverurl}/user/favoritesid/${Cookies.get("userId")}`
         );
         console.log("response for favorites", response);
         setFavorites(response.data.characters);
@@ -91,7 +93,7 @@ const Characters = () => {
       }
     };
     fetchfavorites();
-  }, [changed]);
+  }, [changed, token, userId]);
 
   // console.log("pagemax", pagemax, "limit", limit, typeof limit);
   // console.log("autocompleteoptions", autcompleteoptions);
@@ -133,6 +135,10 @@ const Characters = () => {
                   </p>
                   {/* <button>Favorite</button> */}
                   <FavButton
+                    token={token}
+                    setToken={setToken}
+                    userId={userId}
+                    setUserId={setUserId}
                     category="characters"
                     tab={favorites}
                     id={elem._id}
