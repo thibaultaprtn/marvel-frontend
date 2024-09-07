@@ -12,8 +12,8 @@ import Comic from "./pages/Comic";
 import Favorites from "./pages/Favorites";
 
 function App() {
-  localStorage.setItem("characters", " ");
-  localStorage.setItem("comics", " ");
+  // localStorage.setItem("characters", " ");
+  // localStorage.setItem("comics", " ");
   return (
     <>
       <Router>
