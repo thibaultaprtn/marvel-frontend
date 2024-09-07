@@ -40,6 +40,13 @@ const Header = ({
         >
           Comics
         </button>
+        <button
+          onClick={() => {
+            navigate("/favorites");
+          }}
+        >
+          Favorites
+        </button>
         <>
           {token ? (
             <button

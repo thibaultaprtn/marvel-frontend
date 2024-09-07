@@ -8,6 +8,7 @@ const serverurl = import.meta.env.VITE_BACKURL;
 import FavButton from "../components/FavButton";
 
 const Character = ({ token, setToken, userId, setUserId }) => {
+  //TODO Rajouter un isLoading ?
   const { id } = useParams();
   // console.log(id);
   const [favorites, setFavorites] = useState([]);

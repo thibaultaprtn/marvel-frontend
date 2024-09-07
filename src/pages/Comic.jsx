@@ -10,6 +10,7 @@ const Comic = ({ token, setToken, userId, setUserId }) => {
   const [favorites, setFavorites] = useState([]);
   const [changed, setChanged] = useState(false);
 
+  //TODO Rajouter un isLoading
   useEffect(() => {
     console.log(token);
     const fetchfavorites = async () => {
