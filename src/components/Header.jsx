@@ -28,7 +28,7 @@ const Header = ({
 
         <button
           onClick={() => {
-            navigate("/characters");
+            navigate("/");
           }}
         >
           Characters
@@ -41,14 +41,14 @@ const Header = ({
           Comics
         </button>
         <>
-          {Cookies.get("token") ? (
+          {token ? (
             <button
               onClick={() => {
                 Cookies.remove("token");
                 Cookies.remove("userId");
                 setToken(null);
                 setUserId(null);
-                navigate("/");
+                // navigate("/");
               }}
             >
               Se déconnecter

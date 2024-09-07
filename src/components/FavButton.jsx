@@ -39,7 +39,7 @@ const FavButton = (props) => {
                 },
               });
             } else {
-              localStorage.setItem("characters", tab);
+              localStorage.setItem(`${category}`, tab);
             }
             setChanged(!changed);
           }}
@@ -63,7 +63,7 @@ const FavButton = (props) => {
                 },
               });
             } else {
-              localStorage.setItem("characters", tab);
+              localStorage.setItem(`${category}`, tab);
             }
             setChanged(!changed);
           }}

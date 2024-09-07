@@ -40,7 +40,7 @@ const Loginmodal = ({
             setUserId(response.data._id);
             // navigate("/");
             // TODO Est ce qu'il vaut mieux aller sur Publish ou sur Home à ce moment la ?
-            navigate("/");
+            // navigate("/");
             setDisplayLogin(false);
             console.log("identification réussie");
           } catch (error) {

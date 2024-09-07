@@ -65,10 +65,50 @@ function App() {
               />
             }
           />
-          <Route path="/comics" element={<Comics />} />
-          <Route path="/character/:id" element={<Character />} />
-          <Route path="/comic/:id" element={<Comic />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/comics"
+            element={
+              <Comics
+                userId={userId}
+                setUserId={setUserId}
+                token={token}
+                setToken={setToken}
+              />
+            }
+          />
+          <Route
+            path="/character/:id"
+            element={
+              <Character
+                userId={userId}
+                setUserId={setUserId}
+                token={token}
+                setToken={setToken}
+              />
+            }
+          />
+          <Route
+            path="/comic/:id"
+            element={
+              <Comic
+                userId={userId}
+                setUserId={setUserId}
+                token={token}
+                setToken={setToken}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                userId={userId}
+                setUserId={setUserId}
+                token={token}
+                setToken={setToken}
+              />
+            }
+          />
         </Routes>
       </Router>
     </>

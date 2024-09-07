@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 const serverurl = import.meta.env.VITE_BACKURL;
 
 //import des composants
 import Pagination from "../components/Pagination";
+import FavButton from "../components/FavButton";
 
-const Comics = () => {
+const Comics = ({ token, setToken, userId, setUserId }) => {
   const navigate = useNavigate();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +16,9 @@ const Comics = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [pagemax, setPagemax] = useState(null);
+
+  const [favorites, setFavorites] = useState([]);
+  const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     const searchfilter = search;
@@ -38,6 +43,37 @@ const Comics = () => {
     }, 350);
     return () => clearTimeout(timer);
   }, [search, page, limit]);
+
+  useEffect(() => {
+    if (page > pagemax) {
+      setPage(pagemax);
+    }
+  }, [limit]);
+
+  useEffect(() => {
+    // console.log(Cookies.get("token"));
+    const fetchfavorites = async () => {
+      if (token) {
+        console.log("chemin de cookie");
+        console.log("token", token);
+        console.log("userId", userId);
+        const response = await axios.get(
+          `${serverurl}/user/favoritesid/${userId}`
+        );
+        console.log("response for favorites", response);
+        setFavorites(response.data.comics);
+        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+      } else {
+        console.log("chemin de local storage");
+        setFavorites(
+          localStorage.getItem("comics")
+            ? localStorage.getItem("comics").split(",")
+            : []
+        );
+      }
+    };
+    fetchfavorites();
+  }, [changed, token, userId]);
 
   return (
     <>
@@ -67,14 +103,26 @@ const Comics = () => {
           <div>
             {data.results.map((elem) => {
               return (
-                <div
-                  key={elem._id}
-                  onClick={(e) => {
-                    navigate(`/comic/${elem._id}`);
-                  }}
-                >
-                  <p>{elem.title}</p>
-                  <button>Favorite</button>
+                <div key={elem._id}>
+                  <p
+                    onClick={(e) => {
+                      navigate(`/comic/${elem._id}`);
+                    }}
+                  >
+                    {elem.title}
+                  </p>
+                  {/* <button>Favorite</button> */}
+                  <FavButton
+                    token={token}
+                    setToken={setToken}
+                    userId={userId}
+                    setUserId={setUserId}
+                    category="comics"
+                    tab={favorites}
+                    id={elem._id}
+                    setChanged={setChanged}
+                    changed={changed}
+                  />
                 </div>
               );
             })}

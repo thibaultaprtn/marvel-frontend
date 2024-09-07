@@ -7,7 +7,7 @@ const serverurl = import.meta.env.VITE_BACKURL;
 //Import des composants utiles
 import FavButton from "../components/FavButton";
 
-const Character = () => {
+const Character = ({ token, setToken, userId, setUserId }) => {
   const { id } = useParams();
   // console.log(id);
   const [favorites, setFavorites] = useState([]);
@@ -15,12 +15,12 @@ const Character = () => {
 
   // localStorage.setItem("favcharacters", ["a", "b", "c"]);
   useEffect(() => {
-    console.log(Cookies.get("token"));
+    console.log(token);
     const fetchfavorites = async () => {
-      if (Cookies.get("token")) {
+      if (token) {
         console.log("chemin de cookie");
         const response = await axios.get(
-          `${serverurl}/user/favoritesid/${Cookies.get("id")}`
+          `${serverurl}/user/favoritesid/${userId}`
         );
         console.log("response for favorites", response);
         setFavorites(response.data.characters);
@@ -35,13 +35,17 @@ const Character = () => {
       }
     };
     fetchfavorites();
-  }, [changed]);
+  }, [changed, token, userId]);
   console.log("favorites before return", favorites);
   return (
     <>
       <div>
         Character
         <FavButton
+          token={token}
+          setToken={setToken}
+          userId={userId}
+          setUserId={setUserId}
           category="characters"
           tab={favorites}
           id={id}

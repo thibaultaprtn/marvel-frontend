@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FavButton from "../components/FavButton";
+
 import Cookies from "js-cookie";
 
 //Packages pour l'autocomplete qui n'a pas abbouti
@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 
 //Import des composants
 import Pagination from "../components/Pagination";
+import FavButton from "../components/FavButton";
 
 const serverurl = import.meta.env.VITE_BACKURL;
 
@@ -78,7 +79,7 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
         console.log("token", token);
         console.log("userId", userId);
         const response = await axios.get(
-          `${serverurl}/user/favoritesid/${Cookies.get("userId")}`
+          `${serverurl}/user/favoritesid/${userId}`
         );
         console.log("response for favorites", response);
         setFavorites(response.data.characters);
