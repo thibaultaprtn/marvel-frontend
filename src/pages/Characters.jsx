@@ -110,7 +110,7 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
             alignItems: "center",
           }}
         >
-          <p>Chargement</p>
+          <p>LOADING</p>
         </div>
       ) : (
         <>
@@ -183,7 +183,6 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
               })}
             </div>
             <Pagination
-              style={{ marginBottom: 50 }}
               page={page}
               setPage={setPage}
               pagemax={pagemax}
@@ -193,6 +192,7 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
             />
             {/* TODORajouter une marge */}
           </div>
+          <div style={{ marginBottom: 50 }}></div>
         </>
       )}
     </>

@@ -4,7 +4,15 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md"; //<MdOutlineKeyboar
 import { MdOutlineKeyboardArrowRight } from "react-icons/md"; //<MdOutlineKeyboardArrowRight />
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md"; //<MdOutlineKeyboardDoubleArrowRight />
 
-const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
+const Pagination = ({
+  page,
+  setPage,
+  pagemax,
+  limit,
+  setLimit,
+  datacount,
+  category,
+}) => {
   return (
     <>
       <div className="paginationdiv">
@@ -78,7 +86,7 @@ const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
           />
         </div>
         <div>
-          <label htmlFor="limit">CHARACTERS PER PAGE :</label>
+          <label htmlFor="limit">{category} PER PAGE :</label>
           <select
             className="limitselect"
             style={{ borderColor: "#757575", borderRadius: 3 }}

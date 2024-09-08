@@ -27,6 +27,7 @@ div.subpaginationdiv {
 }
 .paginationbutton:hover {
   cursor: pointer;
+  color: white;
 }
 
 .paginationspan {
@@ -58,6 +59,10 @@ input.pageinput {
   border: none;
   color: #757575;
   height: 20px;
+}
+
+.limitselect:hover {
+  cursor: pointer;
 }
 
 .limitselect:focus {

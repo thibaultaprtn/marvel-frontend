@@ -45,7 +45,14 @@ const Header = ({
         >
           COMICS
         </button>
-        <img className="headerlogo" src={logo} alt="logo" />
+        <img
+          className="headerlogo"
+          src={logo}
+          alt="logo"
+          onClick={(e) => {
+            navigate("/");
+          }}
+        />
         <button
           className="headerbutton"
           onClick={() => {

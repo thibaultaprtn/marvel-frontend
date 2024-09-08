@@ -87,7 +87,7 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
             alignItems: "center",
           }}
         >
-          <p>Chargement</p>
+          <p>LOADING</p>
         </div>
       ) : (
         <>
@@ -112,6 +112,7 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
               limit={limit}
               setLimit={setLimit}
               datacount={data.count}
+              category="COMICS"
             />
 
             <div className="comicsdiv">
@@ -152,6 +153,16 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
                 );
               })}
             </div>
+            <Pagination
+              page={page}
+              setPage={setPage}
+              pagemax={pagemax}
+              limit={limit}
+              setLimit={setLimit}
+              datacount={data.count}
+              category="COMICS"
+            />
+            <div style={{ marginBottom: 50 }}></div>
           </div>
         </>
       )}

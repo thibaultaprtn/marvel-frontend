@@ -98,7 +98,7 @@ const Character = ({ token, setToken, userId, setUserId }) => {
             alignItems: "center",
           }}
         >
-          <p>Chargement</p>
+          <p>LOADING</p>
         </div>
       ) : (
         <div className="container">
@@ -132,10 +132,17 @@ const Character = ({ token, setToken, userId, setUserId }) => {
               </p>
             </div>
           </div>
-          <h3 className="characterpageappearance">
-            {character.name} appears in the {character.comics.length} following
-            comics :
-          </h3>
+          {character.comics.length ? (
+            <h3 className="characterpageappearance">
+              {character.name} appears in the {character.comics.length}{" "}
+              following comics :
+            </h3>
+          ) : (
+            <h3 className="characterpageappearance">
+              {character.name} does not appear in any comic of the library.
+            </h3>
+          )}
+
           <div className="characterpagecomic">
             {character.comics.map((elem, index) => {
               // console.log("element to probe", elem._id);

@@ -100,6 +100,7 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
       {isLoading ? (
         <div
           style={{
+            height: "100vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -115,15 +116,14 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
           <div className="favoritespagemap">
             {favoritesCharacters.map((elem) => {
               return (
-                <div className="favoritespagecharacterdiv" key={elem._id}>
-                  <p
-                    className="favoritespagecharactername"
-                    onClick={(e) => {
-                      navigate(`/character/${elem._id}`);
-                    }}
-                  >
-                    {elem.name}
-                  </p>
+                <div
+                  className="favoritespagecharacterdiv"
+                  key={elem._id}
+                  onClick={(e) => {
+                    navigate(`/character/${elem._id}`);
+                  }}
+                >
+                  <p className="favoritespagecharactername">{elem.name}</p>
                   <div className="favoritepagepicturebox">
                     <img
                       src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
@@ -151,47 +151,19 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
           </div>
 
           <h3 className="favoritespageh3">COMICS</h3>
-          {/* <div>
-            {favoritesComics.map((elem) => {
-              return (
-                <div key={elem._id}>
-                  <p
-                    onClick={(e) => {
-                      navigate(`/comic/${elem._id}`);
-                    }}
-                  >
-                    {elem.title}
-                  </p>
-                  <FavButton
-                    onclick="return confirm('are you sure?')"
-                    token={token}
-                    setToken={setToken}
-                    userId={userId}
-                    setUserId={setUserId}
-                    category="comics"
-                    tab={favorites.comics}
-                    id={elem._id}
-                    setChanged={setChanged}
-                    changed={changed}
-                  />
-                </div>
-              );
-            })}
-          </div> */}
 
-          <div className="favoritespagemap">
+          <div className="favoritespagemap" style={{ marginBottom: 70 }}>
             {favoritesComics.map((elem) => {
               // console.log("parcourt comics :", elem);
               return (
-                <div className="favoritespagecharacterdiv" key={elem._id}>
-                  <p
-                    className="favoritespagecharactername"
-                    onClick={(e) => {
-                      navigate(`/character/${elem._id}`);
-                    }}
-                  >
-                    {elem.name}
-                  </p>
+                <div
+                  className="favoritespagecharacterdiv"
+                  key={elem._id}
+                  onClick={(e) => {
+                    navigate(`/comic/${elem._id}`);
+                  }}
+                >
+                  <p className="favoritespagecomictitle">{elem.title}</p>
                   <div className="favoritepagepicturebox">
                     <img
                       src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}

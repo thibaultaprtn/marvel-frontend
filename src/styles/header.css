@@ -17,6 +17,10 @@ img.headerlogo {
   height: 50px;
 }
 
+img.headerlogo:hover {
+  cursor: pointer;
+}
+
 .headerbutton {
   background-color: transparent;
   color: white;
