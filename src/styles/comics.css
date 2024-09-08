@@ -18,6 +18,10 @@
   border-radius: 5px;
 }
 
+.comicssearchbar:focus {
+  outline: none;
+}
+
 .comicsdiv {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -61,13 +65,13 @@
   /* flex: 1; */
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   /* justify-content: center; */
   /* align-items: center; */
 }
 
 .comicbox h2 {
-  font-size: 26px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -75,8 +79,8 @@
   text-justify: auto;
   flex: 1;
   color: #595959;
-  font-size: 14px;
-  overflow: hidden;
+  font-size: 13px;
+  overflow: scroll;
 }
 
 .comicdescriptionparagraph:hover {

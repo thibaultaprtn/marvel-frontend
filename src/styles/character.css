@@ -1,0 +1,84 @@
+.characterpagetitle {
+  margin: 40px 0 40px 10px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.characterpagepicanddescriptiondiv {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 30px;
+}
+
+.characterpagepicdiv {
+  position: relative;
+}
+
+.characterpagepic {
+  border-radius: 10px;
+  border: 1px solid #757575;
+}
+
+div.characterpagebuttonliner1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.characterpagepicanddescriptiondiv h3 {
+  color: #757575;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.characterpagedescription {
+  margin-top: 20px;
+  font-size: 25px;
+  color: #757575;
+  text-align: justify;
+}
+
+.characterpageappearance {
+  margin: 30px 0 15px 0;
+  color: #757575;
+  font-size: 20px;
+}
+
+.characterpagecomic {
+  display: flex;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.characterpagecomicdiv {
+  width: calc((100%-40px) / 5);
+  position: relative;
+  margin-bottom: 30px;
+}
+.characterpagecomicdiv:hover {
+  cursor: pointer;
+}
+.characterpagecomicdiv:hover > img {
+  opacity: 90%;
+}
+
+.characterpagecomicdiv > img {
+  object-position: center;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.characterpaccomicbuttonliner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.characterpagecomicdiv p {
+  margin-top: 5px;
+  color: #757575;
+  font-size: 12px;
+  height: 24px;
+  overflow: hidden;
+}

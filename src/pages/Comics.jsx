@@ -116,7 +116,7 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
 
             <div className="comicsdiv">
               {data.results.map((elem) => {
-                // console.log("element comics", elem);
+                console.log("element comics", elem);
                 const url = `${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`;
                 return (
                   <div
@@ -144,7 +144,9 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
                     </div>
                     <div className="comicdescriptionbox">
                       <h2>{elem.title}</h2>
-                      <p className="comicdescriptionparagraph">blablabla</p>
+                      <p className="comicdescriptionparagraph">
+                        {elem.description}
+                      </p>
                     </div>
                   </div>
                 );
