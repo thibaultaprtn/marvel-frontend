@@ -24,18 +24,18 @@ const Character = ({ token, setToken, userId, setUserId }) => {
 
   // localStorage.setItem("favcharacters", ["a", "b", "c"]);
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
     const fetchfavorites = async () => {
       if (token) {
-        console.log("chemin de cookie");
+        // console.log("chemin de cookie");
         const response = await axios.get(
           `${serverurl}/user/favoritesid/${userId}`
         );
-        console.log("response for favorites", response);
+        // console.log("response for favorites", response);
         setFavorites(response.data.characters);
         // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
       } else {
-        console.log("chemin de local storage");
+        // console.log("chemin de local storage");
         setFavorites(
           localStorage.getItem("characters")
             ? localStorage.getItem("characters").split(",")
@@ -48,18 +48,18 @@ const Character = ({ token, setToken, userId, setUserId }) => {
   }, [changed, token, userId]);
 
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
     const fetchfavoritescomics = async () => {
       if (token) {
-        console.log("chemin de cookie");
+        // console.log("chemin de cookie");
         const response = await axios.get(
           `${serverurl}/user/favoritesid/${userId}`
         );
-        console.log("response for favorites", response);
+        // console.log("response for favorites", response);
         setFavoritesComics(response.data.comics);
         // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
       } else {
-        console.log("chemin de local storage");
+        // console.log("chemin de local storage");
         setFavoritesComics(
           localStorage.getItem("comics")
             ? localStorage.getItem("comics").split(",")
@@ -77,7 +77,7 @@ const Character = ({ token, setToken, userId, setUserId }) => {
         const characterfetched = await axios.get(`${serverurl}/comics/${id}`);
 
         setCharacter(characterfetched.data);
-        console.log("infos obtenues sur le character", characterfetched.data);
+        // console.log("infos obtenues sur le character", characterfetched.data);
         setIsLoading2(false);
       } catch (error) {
         res.status(500).json({ message: error.message });
@@ -138,7 +138,7 @@ const Character = ({ token, setToken, userId, setUserId }) => {
           </h3>
           <div className="characterpagecomic">
             {character.comics.map((elem, index) => {
-              console.log("element to probe", elem._id);
+              // console.log("element to probe", elem._id);
               return (
                 <div
                   className="characterpagecomicdiv"

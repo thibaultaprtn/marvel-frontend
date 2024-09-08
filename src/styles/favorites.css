@@ -1,0 +1,44 @@
+.favoritespageh2 {
+  margin: 40px 0 40px 0;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.favoritespageh3 {
+  margin: 20px 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.favoritespagemap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.favoritespagecharacterdiv {
+  width: calc((100% - 40px) / 5);
+}
+
+.favoritespagecharactername {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.favoritespagecharacterdiv img {
+  width: 100%;
+  object-position: center;
+
+  border-radius: 5px;
+}
+
+.favoritepagepicturebox {
+  width: 100%;
+  position: relative;
+}
+
+.favoritepagecharactersbuttonliner {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

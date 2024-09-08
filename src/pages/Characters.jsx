@@ -76,17 +76,17 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
     // console.log(Cookies.get("token"));
     const fetchfavorites = async () => {
       if (token) {
-        console.log("chemin de cookie");
-        console.log("token", token);
-        console.log("userId", userId);
+        // console.log("chemin de cookie");
+        // console.log("token", token);
+        // console.log("userId", userId);
         const response = await axios.get(
           `${serverurl}/user/favoritesid/${userId}`
         );
-        console.log("response for favorites", response);
+        // console.log("response for favorites", response);
         setFavorites(response.data.characters);
         // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
       } else {
-        console.log("chemin de local storage");
+        // console.log("chemin de local storage");
         setFavorites(
           localStorage.getItem("characters")
             ? localStorage.getItem("characters").split(",")

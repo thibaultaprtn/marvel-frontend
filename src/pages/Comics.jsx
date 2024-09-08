@@ -29,7 +29,7 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
       const { data } = await axios.get(`${serverurl}/comics`, {
         params: { title: searchfilter, page: pagefilter, limit: limitfilter },
       });
-      console.log("data", data);
+      // console.log("data", data);
       setData(data);
       setPagemax(
         isFinite(Math.ceil(data.count / limitfilter))
@@ -55,17 +55,17 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
     // console.log(Cookies.get("token"));
     const fetchfavorites = async () => {
       if (token) {
-        console.log("chemin de cookie");
-        console.log("token", token);
-        console.log("userId", userId);
+        // console.log("chemin de cookie");
+        // console.log("token", token);
+        // console.log("userId", userId);
         const response = await axios.get(
           `${serverurl}/user/favoritesid/${userId}`
         );
-        console.log("response for favorites", response);
+        // console.log("response for favorites", response);
         setFavorites(response.data.comics);
         // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
       } else {
-        console.log("chemin de local storage");
+        // console.log("chemin de local storage");
         setFavorites(
           localStorage.getItem("comics")
             ? localStorage.getItem("comics").split(",")
@@ -116,7 +116,7 @@ const Comics = ({ token, setToken, userId, setUserId }) => {
 
             <div className="comicsdiv">
               {data.results.map((elem) => {
-                console.log("element comics", elem);
+                // console.log("element comics", elem);
                 const url = `${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`;
                 return (
                   <div

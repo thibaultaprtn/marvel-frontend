@@ -12,18 +12,18 @@ const Comic = ({ token, setToken, userId, setUserId }) => {
 
   //TODO Rajouter un isLoading
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
     const fetchfavorites = async () => {
       if (token) {
-        console.log("chemin de cookie");
+        // console.log("chemin de cookie");
         const response = await axios.get(
           `${serverurl}/user/favoritesid/${userId}`
         );
-        console.log("response for favorites", response);
+        // console.log("response for favorites", response);
         setFavorites(response.data.comics);
         // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
       } else {
-        console.log("chemin de local storage");
+        // console.log("chemin de local storage");
         setFavorites(
           localStorage.getItem("comics")
             ? localStorage.getItem("comics").split(",")

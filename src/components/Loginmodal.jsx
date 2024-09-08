@@ -34,7 +34,7 @@ const Loginmodal = ({
               password: pwd,
             };
             const response = await axios.post(`${backurl}/user/login`, req);
-            console.log(response);
+            // console.log(response);
             Cookies.set("token", response.data.token, { expires: 7 });
             Cookies.set("userId", response.data._id, { expires: 7 });
             setToken(response.data.token);
