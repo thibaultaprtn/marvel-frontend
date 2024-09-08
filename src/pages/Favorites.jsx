@@ -100,6 +100,7 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
   }, [token]);
   // console.log("testing", favoritesCharacters);
   // console.log("testing2", favoritesComics);
+  // console.log([].length);
   // console.log("favorites", favorites);
   // console.log("testing2", favoritesComics);
 
@@ -121,82 +122,90 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
           <h2 className="favoritespageh2">FAVORITES</h2>
           <h3 className="favoritespageh3"> CHARACTERS</h3>
 
-          <div className="favoritespagemap">
-            {favoritesCharacters.map((elem) => {
-              return (
-                <div
-                  className="favoritespagecharacterdiv"
-                  key={elem._id}
-                  onClick={(e) => {
-                    navigate(`/character/${elem._id}`);
-                  }}
-                >
-                  <p className="favoritespagecharactername">{elem.name}</p>
-                  <div className="favoritepagepicturebox">
-                    <img
-                      src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
-                      alt={elem.name}
-                    />
-                    <div className="favoritepagecharactersbuttonliner">
-                      <FavButton
-                        token={token}
-                        setToken={setToken}
-                        userId={userId}
-                        setUserId={setUserId}
-                        category="characters"
-                        tab={favorites.characters}
-                        id={elem._id}
-                        setChanged={setChanged}
-                        changed={changed}
+          {favoritesCharacters.length === 0 ? (
+            <div>No character has been added to the favorites.</div>
+          ) : (
+            <div className="favoritespagemap">
+              {favoritesCharacters.map((elem) => {
+                return (
+                  <div
+                    className="favoritespagecharacterdiv"
+                    key={elem._id}
+                    onClick={(e) => {
+                      navigate(`/character/${elem._id}`);
+                    }}
+                  >
+                    <p className="favoritespagecharactername">{elem.name}</p>
+                    <div className="favoritepagepicturebox">
+                      <img
+                        src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
+                        alt={elem.name}
                       />
+                      <div className="favoritepagecharactersbuttonliner">
+                        <FavButton
+                          token={token}
+                          setToken={setToken}
+                          userId={userId}
+                          setUserId={setUserId}
+                          category="characters"
+                          tab={favorites.characters}
+                          id={elem._id}
+                          setChanged={setChanged}
+                          changed={changed}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* <button>Favorite</button> */}
-                </div>
-              );
-            })}
-          </div>
+                    {/* <button>Favorite</button> */}
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <h3 className="favoritespageh3">COMICS</h3>
 
-          <div className="favoritespagemap" style={{ marginBottom: 70 }}>
-            {favoritesComics.map((elem) => {
-              // console.log("parcourt comics :", elem);
-              return (
-                <div
-                  className="favoritespagecharacterdiv"
-                  key={elem._id}
-                  onClick={(e) => {
-                    navigate(`/comic/${elem._id}`);
-                  }}
-                >
-                  <p className="favoritespagecomictitle">{elem.title}</p>
-                  <div className="favoritepagepicturebox">
-                    <img
-                      src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
-                      alt={elem.title}
-                    />
-                    <div className="favoritepagecharactersbuttonliner">
-                      <FavButton
-                        token={token}
-                        setToken={setToken}
-                        userId={userId}
-                        setUserId={setUserId}
-                        category="comics"
-                        tab={favorites.comics}
-                        id={elem._id}
-                        setChanged={setChanged}
-                        changed={changed}
+          {favoritesComics.length === 0 ? (
+            <div>No comic has been added to the favorites.</div>
+          ) : (
+            <div className="favoritespagemap" style={{ marginBottom: 70 }}>
+              {favoritesComics.map((elem) => {
+                // console.log("parcourt comics :", elem);
+                return (
+                  <div
+                    className="favoritespagecharacterdiv"
+                    key={elem._id}
+                    onClick={(e) => {
+                      navigate(`/comic/${elem._id}`);
+                    }}
+                  >
+                    <p className="favoritespagecomictitle">{elem.title}</p>
+                    <div className="favoritepagepicturebox">
+                      <img
+                        src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
+                        alt={elem.title}
                       />
+                      <div className="favoritepagecharactersbuttonliner">
+                        <FavButton
+                          token={token}
+                          setToken={setToken}
+                          userId={userId}
+                          setUserId={setUserId}
+                          category="comics"
+                          tab={favorites.comics}
+                          id={elem._id}
+                          setChanged={setChanged}
+                          changed={changed}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* <button>Favorite</button> */}
-                </div>
-              );
-            })}
-          </div>
+                    {/* <button>Favorite</button> */}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </>
