@@ -9,8 +9,11 @@ const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
     <>
       <div className="paginationdiv">
         <div className="subpaginationdiv">
-          <label htmlFor="characterspage"> PAGE </label>
-          <button
+          <label className="paginationlabel" htmlFor="characterspage">
+            PAGE :
+          </label>
+
+          <MdOutlineKeyboardDoubleArrowLeft
             className="paginationbutton"
             onClick={(event) => {
               if (page > 5) {
@@ -19,22 +22,20 @@ const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
                 setPage(1);
               }
             }}
-          >
-            <MdOutlineKeyboardDoubleArrowLeft />
-          </button>
-          <button
+          />
+
+          <MdOutlineKeyboardArrowLeft
             className="paginationbutton"
             onClick={(event) => {
               if (page > 1) {
                 setPage(page - 1);
               }
             }}
-          >
-            <MdOutlineKeyboardArrowLeft />
-          </button>
-          <span>1...</span>
+          />
+
+          <span className="paginationspan">1...</span>
           <input
-            id="characterspage"
+            className="pageinput"
             type="number"
             value={page || ""}
             min="1"
@@ -54,18 +55,18 @@ const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
               }
             }}
           />
-          <span>...{pagemax}</span>
-          <button
+          <span className="paginationspan">...{pagemax}</span>
+
+          <MdOutlineKeyboardArrowRight
             className="paginationbutton"
             onClick={(event) => {
               if (page < pagemax) {
                 setPage(page + 1);
               }
             }}
-          >
-            <MdOutlineKeyboardArrowRight />
-          </button>
-          <button
+          />
+
+          <MdOutlineKeyboardDoubleArrowRight
             className="paginationbutton"
             onClick={(event) => {
               if (page < pagemax - 5) {
@@ -74,13 +75,12 @@ const Pagination = ({ page, setPage, pagemax, limit, setLimit, datacount }) => {
                 setPage(pagemax);
               }
             }}
-          >
-            <MdOutlineKeyboardDoubleArrowRight />
-          </button>
+          />
         </div>
         <div>
-          <label htmlFor="limit">Nombre de personnages par page :</label>
+          <label htmlFor="limit">CHARACTERS PER PAGE :</label>
           <select
+            className="limitselect"
             style={{ borderColor: "#757575", borderRadius: 3 }}
             name="limit"
             onChange={(event) => {

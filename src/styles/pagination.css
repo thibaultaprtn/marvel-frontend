@@ -1,20 +1,65 @@
 .paginationdiv {
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #757575;
 }
 
-.subpaginationdiv  {
+div.subpaginationdiv {
+  height: 30px;
+  flex: 1;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: 5px;
+}
+
+.paginationlabel {
+  color: #757575;
+  font-size: 20px;
 }
 
 .paginationbutton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
   border: none;
-  color: white;
+  color: #757575;
+  font-size: 30px;
+}
+.paginationbutton:hover {
+  cursor: pointer;
+}
+
+.paginationspan {
+  color: #757575;
+  font-size: 20px;
+}
+
+input.pageinput {
+  font-size: 20px;
+  border: none;
+  height: 20px;
+  size: 40px;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #757575;
+}
+
+.pageinput:hover {
+  cursor: pointer;
+}
+
+.pageinput:focus {
+  outline: none;
+}
+
+.limitselect {
+  margin-left: 10px;
+  background-color: #1e1e1e;
+  border: none;
+  color: #757575;
+  height: 20px;
+}
+
+.limitselect:focus {
+  outline: none;
 }
