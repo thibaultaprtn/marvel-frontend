@@ -1,0 +1,36 @@
+header {
+  background-color: #f0141e;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.headerdiv {
+  padding: 20px 0;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+img.headerlogo {
+  height: 50px;
+}
+
+.headerbutton {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  /* width: 50px; */
+}
+
+.headerbutton:hover {
+  cursor: pointer;
+  color: rgba(1, 1, 1, 0.7);
+}
+.loginlogoutdiv {
+  display: flex;
+  gap: 20px;
+}

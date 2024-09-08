@@ -1,8 +1,11 @@
 import * as React from "react";
+import "../styles/header.css";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import logo from "../assets/marvel_logo.svg";
 
 const Header = ({
   setDisplaySignup,
@@ -18,7 +21,7 @@ const Header = ({
 
   return (
     <header>
-      <div>
+      <div className="container headerdiv">
         {/* <Link to="/">
           <img
             src="https://lereacteur-vinted.netlify.app/assets/logo-a7c93c98.png"
@@ -27,29 +30,34 @@ const Header = ({
         </Link> */}
 
         <button
+          className="headerbutton"
           onClick={() => {
             navigate("/");
           }}
         >
-          Characters
+          CHARACTERS
         </button>
         <button
+          className="headerbutton"
           onClick={() => {
             navigate("/comics");
           }}
         >
-          Comics
+          COMICS
         </button>
+        <img className="headerlogo" src={logo} alt="logo" />
         <button
+          className="headerbutton"
           onClick={() => {
             navigate("/favorites");
           }}
         >
-          Favorites
+          FAVORITES
         </button>
         <>
           {token ? (
             <button
+              className="headerbutton"
               onClick={() => {
                 Cookies.remove("token");
                 Cookies.remove("userId");
@@ -58,23 +66,25 @@ const Header = ({
                 // navigate("/");
               }}
             >
-              Se déconnecter
+              LOG OUT
             </button>
           ) : (
-            <div>
+            <div className="loginlogoutdiv">
               <button
+                className="headerbutton"
                 onClick={() => {
                   setDisplaySignup(true);
                 }}
               >
-                S'inscrire
+                SIGN IN
               </button>
               <button
+                className="headerbutton"
                 onClick={() => {
                   setDisplayLogin(true);
                 }}
               >
-                Se connecter
+                SIGN UP
               </button>
             </div>
           )}

@@ -1,7 +1,10 @@
 import axios from "axios";
+import "../styles/favbutton.css";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 const serverurl = import.meta.env.VITE_BACKURL;
+import { FaRegHeart } from "react-icons/fa"; //<FaRegHeart />
+import { FaHeart } from "react-icons/fa"; //<FaHeart />
 
 const FavButton = (props) => {
   // Il faut rajouter le traitement du cas de figure ou l'utilisateur est authentifié
@@ -23,7 +26,9 @@ const FavButton = (props) => {
     <>
       {tab.includes(id) ? (
         <button
-          onClick={async () => {
+          className="favbutton"
+          onClick={async (e) => {
+            e.stopPropagation();
             let index = tab.indexOf(id);
             let tabtemp = tab;
             tabtemp.splice(index, 1);
@@ -44,11 +49,13 @@ const FavButton = (props) => {
             setChanged(!changed);
           }}
         >
-          Supprimer des favoris
+          <FaHeart />
         </button>
       ) : (
         <button
-          onClick={async () => {
+          className="favbutton"
+          onClick={async (e) => {
+            e.stopPropagation();
             let tabtemp = tab;
             tabtemp.push(id);
 
@@ -68,7 +75,7 @@ const FavButton = (props) => {
             setChanged(!changed);
           }}
         >
-          Ajouter aux favoris
+          <FaRegHeart />
         </button>
       )}
     </>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import "../styles/characters.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -104,51 +105,74 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
         <p>Chargement...</p>
       ) : (
         <>
-          <label htmlFor="characterssearchbar">Rechercher par nom</label>
-          <input
-            // options={["abc", "bcd", "def"]}
-            id="characterssearchbar"
-            value={search}
-            onChange={(event) => {
-              setSearch(event.target.value);
-            }}
-          />
+          <div className="container">
+            {/* <label className="" htmlFor="characterssearchbar">
+              Rechercher par nom
+            </label> */}
+            <div className="charchtersearchbardiv">
+              <input
+                className="charactersearchbar"
+                // options={["abc", "bcd", "def"]}
+                placeholder="SEARCH BY NAME..."
+                // id="characterssearchbar"
+                value={search}
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                }}
+              />
+            </div>
 
-          <Pagination
-            page={page}
-            setPage={setPage}
-            pagemax={pagemax}
-            limit={limit}
-            setLimit={setLimit}
-            datacount={data.count}
-          />
+            <Pagination
+              page={page}
+              setPage={setPage}
+              pagemax={pagemax}
+              limit={limit}
+              setLimit={setLimit}
+              datacount={data.count}
+            />
 
-          <div>
-            {data.results.map((elem) => {
-              return (
-                <div key={elem._id}>
-                  <p
+            <div className="charactersdiv">
+              {data.results.map((elem) => {
+                // console.log(elem);
+                const url = `${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`;
+                //fantastic 168*252px
+                //uncanny 300*450px
+                return (
+                  <div
+                    className="characterbox"
+                    key={elem._id}
                     onClick={(e) => {
                       navigate(`/character/${elem._id}`);
                     }}
                   >
-                    {elem.name}
-                  </p>
-                  {/* <button>Favorite</button> */}
-                  <FavButton
-                    token={token}
-                    setToken={setToken}
-                    userId={userId}
-                    setUserId={setUserId}
-                    category="characters"
-                    tab={favorites}
-                    id={elem._id}
-                    setChanged={setChanged}
-                    changed={changed}
-                  />
-                </div>
-              );
-            })}
+                    <div className="characterpicbox">
+                      <img className="characterpic" src={url} alt={elem.name} />{" "}
+                      <div className="buttonliner">
+                        <FavButton
+                          token={token}
+                          setToken={setToken}
+                          userId={userId}
+                          setUserId={setUserId}
+                          category="characters"
+                          tab={favorites}
+                          id={elem._id}
+                          setChanged={setChanged}
+                          changed={changed}
+                        />
+                      </div>
+                    </div>
+                    <div className="characterdescriptionbox">
+                      <h2>{elem.name}</h2>
+                      <p className="characterdescriptionparagraph">
+                        {elem.description}
+                      </p>
+                    </div>
+
+                    {/* <button>Favorite</button> */}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </>
       )}

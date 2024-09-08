@@ -1,0 +1,20 @@
+.paginationdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #757575;
+}
+
+.subpaginationdiv  {
+  display: flex;
+  align-items: center;
+}
+
+.paginationbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
