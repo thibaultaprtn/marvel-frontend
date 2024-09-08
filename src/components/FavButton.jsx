@@ -21,7 +21,7 @@ const FavButton = (props) => {
   } = props;
   // console.log(tab);
   const isConnected = token ? true : false;
-
+  // console.log("finding problem", tab);
   return (
     <>
       {tab.includes(id) ? (

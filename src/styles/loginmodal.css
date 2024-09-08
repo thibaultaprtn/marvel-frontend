@@ -1,0 +1,76 @@
+.backgroundmodal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  position: fixed;
+  top: 20vh;
+  left: 40vw;
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  z-index: 20;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-weight: bold;
+
+  /* text-align: center; */
+  /* display: flex;
+    flex-direction: column; */
+}
+
+#logincloseicon {
+  align-self: flex-end;
+  color: white;
+  font-size: 20px;
+}
+
+#logincloseicon:hover {
+  cursor: pointer;
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.logininput {
+  border: none;
+  height: 20px;
+  border-radius: 3px;
+}
+
+.logininput:focus {
+  outline: none;
+}
+
+.loginbutton {
+  text-align: center;
+  background-color: white;
+  border: none;
+  height: 30px;
+  border-radius: 3px;
+}
+
+.loginbutton:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.logincomment {
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+.logincomment:hover {
+  cursor: pointer;
+  color: rgb(255, 255, 255, 0.8);
+}

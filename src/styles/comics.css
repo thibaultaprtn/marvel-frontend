@@ -1,4 +1,4 @@
-.charactersearchbardiv {
+.comicssearchbardiv {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   margin: 20px 30px;
 }
 
-.charactersearchbar {
+.comicssearchbar {
   text-align: center;
   background-color: #1e1e1e;
   flex: 1;
@@ -18,10 +18,7 @@
   border-radius: 5px;
 }
 
-/* .charactersearchbar:hover {
-} */
-
-.charactersdiv {
+.comicsdiv {
   margin-top: 30px;
   margin-bottom: 20px;
   display: flex;
@@ -29,36 +26,28 @@
   gap: 10px;
 }
 
-.characterbox {
+.comicbox {
   border-radius: 10px;
-
   border: 1px solid #1e1e1e;
   width: calc((100% - 40px) / 5);
   background-color: #141414;
   height: 340px;
 }
 
-.characterbox:hover {
+.comicbox:hover {
   box-shadow: 3px 2px 2px #1e1e1e;
   cursor: pointer;
   opacity: 90%;
 }
 
-.characterpicbox {
+.comicpicbox {
   height: 220px;
   width: 100%;
   position: relative;
   z-index: 1;
 }
 
-.buttonliner {
-  position: absolute;
-  z-index: 2;
-  bottom: 15px;
-  right: 15px;
-}
-
-.characterpic {
+.comicpic {
   border-radius: 10px 10px 0px 0px;
   width: 100%;
   height: 220px;
@@ -66,7 +55,7 @@
   object-position: top;
 }
 
-.characterdescriptionbox {
+.comicdescriptionbox {
   padding: 10px;
   height: 120px;
   /* flex: 1; */
@@ -77,13 +66,12 @@
   /* align-items: center; */
 }
 
-.characterbox h2 {
-  /* text-align: center; */
+.comicbox h2 {
   font-size: 26px;
   font-weight: bold;
 }
 
-.characterdescriptionparagraph {
+.comicdescriptionparagraph {
   text-justify: auto;
   flex: 1;
   color: #595959;
@@ -91,6 +79,6 @@
   overflow: hidden;
 }
 
-.characterbox:hover .characterdescriptionparagraph {
+.comicdescriptionparagraph:hover {
   color: white;
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const backurl = import.meta.env.VITE_BACKURL;
+import "../styles/signin.css";
 
 import Cookies from "js-cookie";
 import { IoClose } from "react-icons/io5";
@@ -24,8 +25,9 @@ const Signupmodal = ({
 
   return (
     <>
-      <div> </div>
+      <div className="backgroundmodal"> </div>
       <form
+        className="form"
         action=""
         onSubmit={async (event) => {
           setErrorMessage("");
@@ -54,33 +56,36 @@ const Signupmodal = ({
           }
         }}
       >
-        <p style={{ alignSelf: "flex-end", fontSize: 20 }}>
-          <IoClose
-            onClick={() => {
-              setDisplaySignup(false);
-            }}
-          />
-        </p>
-        <h2>S'inscrire</h2>
+        <IoClose
+          id="signupcloseicon"
+          onClick={() => {
+            setDisplaySignup(false);
+          }}
+        />
+
+        <h2>SIGNIN</h2>
         <input
+          className="signupinput"
           type="text"
-          placeholder="Nom d'utilisateur"
+          placeholder="USERNAME"
           value={username}
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
         <input
+          className="signupinput"
           type="email"
-          placeholder="Email"
+          placeholder="EMAIL"
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
         />
         <input
+          className="signupinput"
           type="password"
-          placeholder="Mot de passe"
+          placeholder="PASSWORD"
           value={pwd}
           onChange={(event) => {
             setPwd(event.target.value);
@@ -92,21 +97,22 @@ const Signupmodal = ({
             display: "flex",
             justifyContent: "space-between",
             gap: 15,
-            marginTop: 20,
-            marginBottom: 20,
+            marginTop: 0,
+            marginBottom: 0,
           }}
         ></div>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <button id="signupsubmitbutton" type="submit">
-          S'inscrire
+        <button className="signupbutton" type="submit">
+          SIGN IN
         </button>
         <p
+          className="signupcomment"
           style={{ textAlign: "center" }}
           onClick={() => {
             setDisplayLogin(true), setDisplaySignup(false);
           }}
         >
-          Tu as déjà un compte ? Connecte-toi !
+          YOU ALREADY HAVE AN ACCOUNT ? LOG IN !
         </p>
       </form>
     </>

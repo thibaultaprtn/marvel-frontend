@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const backurl = import.meta.env.VITE_BACKURL;
 import Cookies from "js-cookie";
 import { IoClose } from "react-icons/io5";
+import "../styles/loginmodal.css";
 
 const Loginmodal = ({
   setDisplayLogin,
@@ -50,41 +51,43 @@ const Loginmodal = ({
         }}
       >
         <IoClose
-          style={{ alignSelf: "flex-end" }}
+          id="logincloseicon"
           onClick={() => {
             setDisplayLogin(false);
           }}
         />
-        <h2>Se connecter</h2>
+        <h2>LOGIN</h2>
         <input
+          className="logininput"
           type="email"
-          placeholder="Email"
+          placeholder="EMAIL"
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
         />
         <input
+          className="logininput"
           type="password"
-          placeholder="Mot de passe"
+          placeholder="PASSWORD"
           value={pwd}
           onChange={(event) => {
             setPwd(event.target.value);
           }}
         />
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <button id="loginmodalbutton" type="submit">
-          {" "}
-          Se connecter
+        <button className="loginbutton" type="submit">
+          LOGIN
         </button>
         <p
+          className="logincomment"
           style={{ textAlign: "center" }}
           onClick={() => {
             setDisplaySignup(true);
             setDisplayLogin(false);
           }}
         >
-          Pas encore de compte ? Inscris-toi !
+          YOU DO NOT HAVE AN ACCOUNT YET ? SIGN IN !
         </p>
       </form>
     </>

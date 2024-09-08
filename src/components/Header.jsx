@@ -84,7 +84,7 @@ const Header = ({
                   setDisplayLogin(true);
                 }}
               >
-                SIGN UP
+                LOGIN
               </button>
             </div>
           )}

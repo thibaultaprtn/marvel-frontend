@@ -38,6 +38,8 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
         console.log("comicsId", comicsId);
         // On fait des requêtes en get/id pour obtenir des tableaux avec toutes les infos
         console.log(charactersId.length);
+        const tab = { characters: charactersId, comics: comicsId };
+        setFavorites(tab);
       }
 
       // testfunction rajoute le retour de la requête dans le tableau
@@ -87,7 +89,15 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
   return (
     <>
       {isLoading ? (
-        <p>Chargement</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Chargement</p>
+        </div>
       ) : (
         <div>
           Favorites

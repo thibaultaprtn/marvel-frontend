@@ -102,14 +102,23 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
   return (
     <>
       {isLoading ? (
-        <p>Chargement...</p>
+        <div
+          style={{
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Chargement</p>
+        </div>
       ) : (
         <>
           <div className="container">
             {/* <label className="" htmlFor="characterssearchbar">
               Rechercher par nom
             </label> */}
-            <div className="charchtersearchbardiv">
+            <div className="charactersearchbardiv">
               <input
                 className="charactersearchbar"
                 // options={["abc", "bcd", "def"]}
@@ -173,6 +182,16 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
                 );
               })}
             </div>
+            <Pagination
+              style={{ marginBottom: 50 }}
+              page={page}
+              setPage={setPage}
+              pagemax={pagemax}
+              limit={limit}
+              setLimit={setLimit}
+              datacount={data.count}
+            />
+            {/* TODORajouter une marge */}
           </div>
         </>
       )}
