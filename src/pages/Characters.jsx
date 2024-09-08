@@ -45,20 +45,24 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
     const searchfilter = search;
     const pagefilter = page;
     const limitfilter = limit;
-    const fetchdata = async () => {
-      const { data } = await axios.get(`${serverurl}/characters`, {
-        params: { name: searchfilter, page: pagefilter, limit: limitfilter },
-      });
-      // console.log("data", data);
-      setData(data);
-      setPagemax(
-        isFinite(Math.ceil(data.count / limitfilter))
-          ? Math.ceil(data.count / limitfilter)
-          : Math.ceil(data.count / 100)
-      );
-      setIsLoading(false);
+    const fetchdata = async (req, res) => {
+      try {
+        const { data } = await axios.get(`${serverurl}/characters`, {
+          params: { name: searchfilter, page: pagefilter, limit: limitfilter },
+        });
+        // console.log("data", data);
+        setData(data);
+        setPagemax(
+          isFinite(Math.ceil(data.count / limitfilter))
+            ? Math.ceil(data.count / limitfilter)
+            : Math.ceil(data.count / 100)
+        );
+        setIsLoading(false);
 
-      //   console.log(data.data.results);
+        //   console.log(data.data.results);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
     };
     const timer = setTimeout(() => {
       fetchdata();
@@ -74,24 +78,28 @@ const Characters = ({ token, setToken, userId, setUserId }) => {
 
   useEffect(() => {
     // console.log(Cookies.get("token"));
-    const fetchfavorites = async () => {
-      if (token) {
-        // console.log("chemin de cookie");
-        // console.log("token", token);
-        // console.log("userId", userId);
-        const response = await axios.get(
-          `${serverurl}/user/favoritesid/${userId}`
-        );
-        // console.log("response for favorites", response);
-        setFavorites(response.data.characters);
-        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
-      } else {
-        // console.log("chemin de local storage");
-        setFavorites(
-          localStorage.getItem("characters")
-            ? localStorage.getItem("characters").split(",")
-            : []
-        );
+    const fetchfavorites = async (req, res) => {
+      try {
+        if (token) {
+          // console.log("chemin de cookie");
+          // console.log("token", token);
+          // console.log("userId", userId);
+          const response = await axios.get(
+            `${serverurl}/user/favoritesid/${userId}`
+          );
+          // console.log("response for favorites", response);
+          setFavorites(response.data.characters);
+          // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+        } else {
+          // console.log("chemin de local storage");
+          setFavorites(
+            localStorage.getItem("characters")
+              ? localStorage.getItem("characters").split(",")
+              : []
+          );
+        }
+      } catch (error) {
+        res.status(400).json({ message: error.message });
       }
     };
     fetchfavorites();

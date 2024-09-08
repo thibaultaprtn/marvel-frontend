@@ -14,79 +14,87 @@ const Favorites = ({ userId, setUserId, token, setToken }) => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const fetchfavorites = async () => {
-      let charactersId = [];
-      let comicsId = [];
-      if (token) {
-        // console.log("chemin de cookies");
-        //Dans le cas ou l'on est connecté on fait un requête pour récupérer les id des favoris que l'on stock dans deux tableaux charactersId et comicsId
-        const response = await axios.get(
-          `${serverurl}/user/favoritesid/${userId}`
-        );
-        // console.log("response", response);
-        setFavorites(response.data);
-        charactersId = response.data.characters;
-        // console.log("charactersId", charactersId);
-        comicsId = response.data.comics;
-        // console.log("comicsId", comicsId);
-        // On fait des requêtes en get/id pour obtenir des tableaux avec toutes les infos
-        // console.log(charactersId.length);
-      } else {
-        // console.log("chemin de local storage");
-        console.log(
-          "test sur le local storage",
-          localStorage.getItem("characters") ? "truthy" : "falsy"
-        );
-        charactersId = localStorage.getItem("characters")
-          ? localStorage.getItem("characters").split(",")
-          : [];
-        comicsId = localStorage.getItem("comics")
-          ? localStorage.getItem("comics").split(",")
-          : [];
-        console.log("charactersId", charactersId);
-        console.log("comicsId", comicsId);
-        // On fait des requêtes en get/id pour obtenir des tableaux avec toutes les infos
-        // console.log(charactersId.length);
-        const tab = { characters: charactersId, comics: comicsId };
-        setFavorites(tab);
-      }
-
-      // testfunction rajoute le retour de la requête dans le tableau
-      const tab = [];
-      const tab2 = [];
-
-      const testfunctiongen = async (charactertab, array, category) => {
-        for (let i = 0; i < charactertab.length; i++) {
-          await testfunction(charactertab[i], array, category);
+    const fetchfavorites = async (req, res) => {
+      try {
+        let charactersId = [];
+        let comicsId = [];
+        if (token) {
+          // console.log("chemin de cookies");
+          //Dans le cas ou l'on est connecté on fait un requête pour récupérer les id des favoris que l'on stock dans deux tableaux charactersId et comicsId
+          const response = await axios.get(
+            `${serverurl}/user/favoritesid/${userId}`
+          );
+          // console.log("response", response);
+          setFavorites(response.data);
+          charactersId = response.data.characters;
+          // console.log("charactersId", charactersId);
+          comicsId = response.data.comics;
+          // console.log("comicsId", comicsId);
+          // On fait des requêtes en get/id pour obtenir des tableaux avec toutes les infos
+          // console.log(charactersId.length);
+        } else {
+          // console.log("chemin de local storage");
+          console.log(
+            "test sur le local storage",
+            localStorage.getItem("characters") ? "truthy" : "falsy"
+          );
+          charactersId = localStorage.getItem("characters")
+            ? localStorage.getItem("characters").split(",")
+            : [];
+          comicsId = localStorage.getItem("comics")
+            ? localStorage.getItem("comics").split(",")
+            : [];
+          console.log("charactersId", charactersId);
+          console.log("comicsId", comicsId);
+          // On fait des requêtes en get/id pour obtenir des tableaux avec toutes les infos
+          // console.log(charactersId.length);
+          const tab = { characters: charactersId, comics: comicsId };
+          setFavorites(tab);
         }
-      };
 
-      const testfunction = async (funcId, array, category) => {
-        const favcharatemp = await axios.get(
-          `${serverurl}/${category}/${funcId}`
-        );
-        // console.log(favcharatemp.data);
-        array.push(favcharatemp.data);
-      };
+        // testfunction rajoute le retour de la requête dans le tableau
+        const tab = [];
+        const tab2 = [];
 
-      await testfunctiongen(charactersId, tab, "character");
-      await testfunctiongen(comicsId, tab2, "comic");
+        const testfunctiongen = async (charactertab, array, category) => {
+          for (let i = 0; i < charactertab.length; i++) {
+            await testfunction(charactertab[i], array, category);
+          }
+        };
 
-      setFavoritesCharacters(tab);
-      setFavoritesComics(tab2);
+        const testfunction = async (funcId, array, category, res) => {
+          try {
+            const favcharatemp = await axios.get(
+              `${serverurl}/${category}/${funcId}`
+            );
+            // console.log(favcharatemp.data);
+            array.push(favcharatemp.data);
+          } catch (error) {
+            res.status(400).json({ message: error.message });
+          }
+        };
 
-      // const favoritesCharactersTab = await charactersId.map(
-      //   async (elem, index) => {
-      //     console.log("elem", elem);
-      //     const response = await axios.get(`${serverurl}/character/${elem}`);
-      //     console.log("response.data", response.data);
-      //     return response.data;
-      //   }
-      // );
+        await testfunctiongen(charactersId, tab, "character");
+        await testfunctiongen(comicsId, tab2, "comic");
 
-      // setFavoritesCharacter(response.data.characters);
-      // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
-      setIsLoading(false);
+        setFavoritesCharacters(tab);
+        setFavoritesComics(tab2);
+
+        // const favoritesCharactersTab = await charactersId.map(
+        //   async (elem, index) => {
+        //     console.log("elem", elem);
+        //     const response = await axios.get(`${serverurl}/character/${elem}`);
+        //     console.log("response.data", response.data);
+        //     return response.data;
+        //   }
+        // );
+
+        // setFavoritesCharacter(response.data.characters);
+        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+        setIsLoading(false);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
     };
     fetchfavorites();
   }, [token]);

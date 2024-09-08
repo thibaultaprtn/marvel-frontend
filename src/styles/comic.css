@@ -1,0 +1,39 @@
+.comicpageglobaldiv {
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.comicpagepicbox {
+  position: relative;
+}
+
+.comicpagepicbox > img {
+  border-radius: 10px;
+  border: 1px solid #757575;
+}
+
+.comicpagebuttonliner {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.comicpagerightdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.comicpagerightdiv > h2 {
+  color: #757575;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.comicpagerightdiv > p {
+  color: #757575;
+  text-align: justify;
+  font-size: 20px;
+}

@@ -25,24 +25,28 @@ const Character = ({ token, setToken, userId, setUserId }) => {
   // localStorage.setItem("favcharacters", ["a", "b", "c"]);
   useEffect(() => {
     // console.log(token);
-    const fetchfavorites = async () => {
-      if (token) {
-        // console.log("chemin de cookie");
-        const response = await axios.get(
-          `${serverurl}/user/favoritesid/${userId}`
-        );
-        // console.log("response for favorites", response);
-        setFavorites(response.data.characters);
-        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
-      } else {
-        // console.log("chemin de local storage");
-        setFavorites(
-          localStorage.getItem("characters")
-            ? localStorage.getItem("characters").split(",")
-            : []
-        );
+    const fetchfavorites = async (req, res) => {
+      try {
+        if (token) {
+          // console.log("chemin de cookie");
+          const response = await axios.get(
+            `${serverurl}/user/favoritesid/${userId}`
+          );
+          // console.log("response for favorites", response);
+          setFavorites(response.data.characters);
+          // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+        } else {
+          // console.log("chemin de local storage");
+          setFavorites(
+            localStorage.getItem("characters")
+              ? localStorage.getItem("characters").split(",")
+              : []
+          );
+        }
+        setIsLoading(false);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
       }
-      setIsLoading(false);
     };
     fetchfavorites();
   }, [changed, token, userId]);
@@ -50,23 +54,27 @@ const Character = ({ token, setToken, userId, setUserId }) => {
   useEffect(() => {
     // console.log(token);
     const fetchfavoritescomics = async () => {
-      if (token) {
-        // console.log("chemin de cookie");
-        const response = await axios.get(
-          `${serverurl}/user/favoritesid/${userId}`
-        );
-        // console.log("response for favorites", response);
-        setFavoritesComics(response.data.comics);
-        // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
-      } else {
-        // console.log("chemin de local storage");
-        setFavoritesComics(
-          localStorage.getItem("comics")
-            ? localStorage.getItem("comics").split(",")
-            : []
-        );
+      try {
+        if (token) {
+          // console.log("chemin de cookie");
+          const response = await axios.get(
+            `${serverurl}/user/favoritesid/${userId}`
+          );
+          // console.log("response for favorites", response);
+          setFavoritesComics(response.data.comics);
+          // Il faut changer l'adresse de manière à faire la requête pour obtenir les favoris
+        } else {
+          // console.log("chemin de local storage");
+          setFavoritesComics(
+            localStorage.getItem("comics")
+              ? localStorage.getItem("comics").split(",")
+              : []
+          );
+        }
+        setIsLoading3(false);
+      } catch (error) {
+        res.status(400).jason({ message: error.message });
       }
-      setIsLoading3(false);
     };
     fetchfavoritescomics();
   }, [changed, token, userId]);
@@ -151,7 +159,7 @@ const Character = ({ token, setToken, userId, setUserId }) => {
                   className="characterpagecomicdiv"
                   key={index}
                   onClick={(e) => {
-                    navigate("/comic/:id");
+                    navigate(`/comic/${elem._id}`);
                   }}
                 >
                   <img
